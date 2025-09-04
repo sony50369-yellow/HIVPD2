@@ -1,4 +1,4 @@
-// HIV PED v3.9 clean
+// HIV Pediatric
 const N=v=>(v===null||v===undefined||v==="")?null:Number(v);
 const round=(x,d=2)=> (typeof x==="number"&&isFinite(x))?Math.round(x*10**d)/10**d:"";
 const BSA=(kg,cm)=> (kg&&cm)?Math.sqrt((kg*cm)/3600):null;
