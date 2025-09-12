@@ -14,8 +14,7 @@ const CONFIG={
       tip:"AZT prophylaxis: 4 mg/kg q12h. ระยะเวลา Low 14d / Standard 28d / High 42d."},
     "3TC":{by_age_wk:[{lt:4,mg_per_kg:2},{ge:4,mg_per_kg:4}],freq:"q12h",cap:150,
       tip:"3TC syrup 10 mg/mL: <4wk 2 mg/kg q12h; ≥4wk 4 mg/kg q12h (max 150 mg/ครั้ง)."},
-    NVP:{mg_per_kg:4,freq:"q24h",dur:42,tip:"NVP syrup 4 mg/kg OD × 42 วัน (เฉพาะ high-risk, ใช้ร่วมกับ AZT+3TC)"},maint:{mg_per_kg:12,freq:"q12h"},
-      tip:"NVP neonatal prophylaxis: lead-in 6 mg/kg q24h → maintenance 12 mg/kg q12h."}
+    NVP:{mg_per_kg:4,freq:"q24h",dur:42,tip:"NVP syrup 4 mg/kg OD × 42 วัน (เฉพาะ high-risk, ใช้ร่วมกับ AZT+3TC)"}
   },
   pediatric:{
     "3TC":{by_wt:[{lt:14,mg_per_kg:4},{ge:14,mg_per_kg:5}],freq:"q12h",cap:150,
@@ -149,9 +148,6 @@ function calcNeonatal(){
     liq.push(rowLiquid({drug:"Zidovudine (AZT) — prophylaxis",info:c.tip,form:"Syrup 10 mg/mL",freq:c.freq,mgDose:mg,mlDose:mg/LIQ10,days})); }
   if(show.has("3TC")){ const c=CONFIG.neonatal["3TC"]; const band=(wk<4)?c.by_age_wk[0]:c.by_age_wk[1]; let mg=kg*band.mg_per_kg; if(c.cap) mg=Math.min(mg,c.cap);
     liq.push(rowLiquid({drug:"Lamivudine (3TC)",info:c.tip,form:"Syrup 10 mg/mL",freq:c.freq,mgDose:mg,mlDose:mg/LIQ10,days})); }
-  if(show.has("NVP")){ const c=CONFIG.neonatal.NVP; const d1=kg*c.lead_in.mg_per_kg, d2=kg*c.maint.mg_per_kg;
-    liq.push(rowLiquid({drug:"Nevirapine (NVP) — lead-in",info:c.tip,form:"Syrup 10 mg/mL",freq:c.lead_in.freq,mgDose:d1,mlDose:d1/LIQ10,days}));
-    liq.push(rowLiquid({drug:"Nevirapine (NVP) — maintenance",info:c.tip,form:"Syrup 10 mg/mL",freq:c.maint.freq,mgDose:d2,mlDose:d2/LIQ10,days})); }
   if (show.has("NVP")){
   const c = CONFIG.neonatal.NVP;
   const mg = kg * c.mg_per_kg;
